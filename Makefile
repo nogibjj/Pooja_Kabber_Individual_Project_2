@@ -7,10 +7,10 @@ test:
 	#python -m pytest -vv test_*.py
 
 format:	
-	black *.py DockerContainer/*.py
+	black *.py LatestNews/*.py
 
 lint:
-	pylint --disable=R,C --ignore-patterns=test_.*?py *.py DockerContainer/*.py
+	pylint --disable=R,C --ignore-patterns=test_.*?py *.py LatestNews/*.py
 
 refactor: format lint
 
