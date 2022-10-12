@@ -1,6 +1,0 @@
-pylint
-click
-pytest
-pytest-cov
-fastapi
-requests
