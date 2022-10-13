@@ -24,9 +24,15 @@ where `<OPENAI_API_KEY>` should be replaced with the OpenAI api key you create.
 
 There are four configurable options for this tool:
 
-1. '--channel': This option lets you define which news program you want to receive news shorts from. This can be chosen from cnn, bbc, msnbc, aljazeera and ndtv.
-2. '--length': This option lets you define the maximum length of every news short. It must lie between 40 and 100 characters.
-3. '--n': This option allows you to configure how many news shorts you want displayed. It must lie between 1 and 40.
-4. '--title': This option allows you to choose whether or not to see the title of the news short.
+1. `--channel`: This option lets you define which news program you want to receive news shorts from. This can be chosen from cnn, bbc, msnbc, aljazeera and ndtv. This is by default cnn.
+2. `--length`: This option lets you define the maximum length of every news short. It must lie between 40 and 100 characters. This is by default 60.
+3. `--n`: This option allows you to configure how many news shorts you want displayed. It must lie between 1 and 40. This is by default 10.
+4. `--title`: This option allows you to choose whether or not to see the title of the news short. This is by default False.
 
-## Example
+### Example
+
+Below is an example usage:
+
+`$docker run -e OPENAI_API_KEY=$OPENAI_API_KEY -it poojakabber/dataengineeringproject2:latest ./latest_news_cli.py --channel bbc --length 40 --title`
+
+This will display 10 news shorts derived from BBC's Youtube channel with their titles, each of maximum length of 40 characters.
