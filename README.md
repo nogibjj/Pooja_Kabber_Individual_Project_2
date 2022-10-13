@@ -1,4 +1,4 @@
-# Command Line Tool For Latest News
+# Command-Line Tool For Latest News
 
 ## Description
 
