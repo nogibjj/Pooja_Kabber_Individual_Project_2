@@ -1,3 +1,4 @@
+import re
 import scrapetube
 from pytube import YouTube
 import os
@@ -7,49 +8,61 @@ import warnings
 
 warnings.filterwarnings("ignore")
 
-videos = scrapetube.get_channel("UCupvZG-5ko_eiXAupbDfxWw")
-model = whisper.load_model("base")
+channels = {
+    "cnn": "UCupvZG-5ko_eiXAupbDfxWw",
+    "bbc": "UC16niRr50-MSBwiO3YDb3RA",
+    "aljazeera": "UCNye-wNBqNL5ZzHSJj3l8Bg",
+    "msnbc": "UCaXkIU1QidjPwiAYu6GcHjg",
+    "ndtv": "UCZFMm1mMw0F81Z37aaEzTUA",
+}
+
+model = whisper.load_model("tiny.en")
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-i = 0
+def get_news(channel, length, n, title):
 
-for video in videos:
-    link = "https://www.youtube.com/watch?v=" + str(video["videoId"])
+    videos = scrapetube.get_channel(channels[channel])
 
-    try:
+    i = 0
+
+    for video in videos:
+        link = "https://www.youtube.com/watch?v=" + str(video["videoId"])
+
         yt = YouTube(link)
-    except:
-        print("Connection Error")  # to handle exception
 
-    if yt.length < 200:
+        if yt.length < 500:
 
-        # extract only audio
-        audio_only = yt.streams.filter(only_audio=True).first()
+            # extract only audio
+            audio_only = yt.streams.filter(only_audio=True).first()
 
-        # download the file
-        out_file = audio_only.download()
+            # download the file
+            out_file = audio_only.download()
 
-        # save the file
-        base, ext = os.path.splitext(out_file)
-        new_file = f"audio_file{i}" + ".mp3"
-        os.rename(out_file, new_file)
+            new_file = f"audio_file{i}" + ".mp3"
+            os.rename(out_file, new_file)
 
-        print(f"TITLE: {yt.title}")
-        result = model.transcribe(new_file)
-        news_text = result["text"]
+            if(title):
+                print(f"TITLE: {yt.title}")
 
-        response = openai.Completion.create(
-            model="text-davinci-002",
-            prompt=f"{news_text}\n\nTl;dr",
-            temperature=0.8,
-            max_tokens=60,
-            top_p=1.0,
-            frequency_penalty=0.0,
-            presence_penalty=0.0,
-        )
-        print(response["choices"][0]["text"]+"\n")
+            result = model.transcribe(new_file)
+            news_text = result["text"]
 
-    i = i + 1
+            response = openai.Completion.create(
+                model="text-davinci-002",
+                prompt=f"{news_text}\n\nTl;dr",
+                temperature=0.8,
+                max_tokens=length,
+                top_p=1.0,
+                frequency_penalty=0.0,
+                presence_penalty=0.0,
+            )
+            
+            response_text = response["choices"][0]["text"]
+            if(response_text[0:3] == ": ") or (response_text[0:3] == ":\n"):
+                response_text = response_text[3:]
+            print(response_text + "\n")
 
-    if i > 40:
-        break
+            i = i + 1
+
+        if i > n:
+            break
