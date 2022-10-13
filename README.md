@@ -33,6 +33,25 @@ There are four configurable options for this tool:
 
 Below is an example usage:
 
-`$docker run -e OPENAI_API_KEY=$OPENAI_API_KEY -it poojakabber/dataengineeringproject2:latest ./latest_news_cli.py --channel bbc --length 40 --title`
+```
+$docker run -e OPENAI_API_KEY=$OPENAI_API_KEY -it poojakabber/dataengineeringproject2:latest ./latest_news_cli.py --channel bbc --length 40 --n 5 --title
+```
 
-This will display 10 news shorts derived from BBC's Youtube channel with their titles, each of maximum length of 40 characters.
+This will display 5 news shorts derived from BBC's Youtube channel with their titles, each of maximum length of 40 characters.
+
+```
+TITLE: What will Russian President Vladimir Putin do next in Ukraine? - BBC News
+ Putin is an authoritarian leader of a nuclear power, and he's not going to back down any time soon.
+
+TITLE: Alex Jones told to pay $965m damages to Sandy Hook shooting victims’ families – BBC News
+ Alex Jones was ordered to pay $100 million to the families of Sandy Hook victims after he claimed the shooting was a hoax.
+
+TITLE: Ukraine war: Countries pledge help as Russian missile strikes continue - BBC News
+ The US and its allies are pledging to provide more military support to Ukraine in the form of weapons and equipment. This comes as Russian forces have intensified their attacks on Ukrainian civilians and infrastructure.
+
+TITLE: G7 countries to back Ukraine ‘for as long as it takes’ - BBC News
+ The Russian military has been carrying out missile strikes in Ukraine for the past two days, causing damage to infrastructure and civilian casualties.
+President Zelensky has appealed to NATO.
+
+TITLE: Texas parents storm school over shooting fears after Uvalde - BBC News
+ High anxiety around potential school shootings is linked to the collective trauma experienced after the Uvaldi shooting.
