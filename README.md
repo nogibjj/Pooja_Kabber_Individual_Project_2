@@ -16,7 +16,9 @@ The project uses Whisper, OpenAI, DockerHub and Github Codespaces to build a com
 
 To run the tool, type in terminal:
 
-`$docker run -e OPENAI_API_KEY=<OPENAI_API_KEY> -it poojakabber/dataengineeringproject2:latest ./latest_news_cli.py`
+```
+$docker run -e OPENAI_API_KEY=<OPENAI_API_KEY> -it poojakabber/dataengineeringproject2:latest ./latest_news_cli.py
+```
 
 where `<OPENAI_API_KEY>` should be replaced with the OpenAI api key you create.
 
