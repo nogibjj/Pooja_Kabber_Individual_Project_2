@@ -1,3 +1,5 @@
+[![Command-Line Tool](https://github.com/nogibjj/Pooja_Kabber_Individual_Project_2/actions/workflows/main.yml/badge.svg)](https://github.com/nogibjj/Pooja_Kabber_Individual_Project_2/actions/workflows/main.yml)
+
 # Command-Line Tool For Latest News
 
 ## Description
